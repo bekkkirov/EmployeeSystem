@@ -1,3 +1,5 @@
+using EmployeeSystem.API.Extensions;
+
 namespace EmployeeSystem.API
 {
     public class Program
@@ -11,6 +13,7 @@ namespace EmployeeSystem.API
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbConnections(builder.Configuration);
 
             var app = builder.Build();
 
