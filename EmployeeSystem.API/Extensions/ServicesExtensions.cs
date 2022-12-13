@@ -1,5 +1,7 @@
-﻿using EmployeeSystem.Application.Options;
+﻿using EmployeeSystem.Application.Interfaces.Persistence;
+using EmployeeSystem.Application.Options;
 using EmployeeSystem.Infrastructure.Persistence;
+using EmployeeSystem.Infrastructure.Persistence.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeSystem.API.Extensions;
@@ -12,5 +14,12 @@ public static class ServicesExtensions
                                    .Get<DbConnectionsOptions>();
 
         services.AddDbContext<SystemContext>(opt => opt.UseSqlServer(options.SystemDb));
+    }
+
+    public static void AddUnitOfWork(this IServiceCollection services)
+    {
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+        services.AddScoped<ITaskRepository, TaskRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }

@@ -14,6 +14,7 @@ namespace EmployeeSystem.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbConnections(builder.Configuration);
+            builder.Services.AddUnitOfWork();
 
             var app = builder.Build();
 
