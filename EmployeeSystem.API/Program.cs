@@ -15,9 +15,11 @@ namespace EmployeeSystem.API
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbConnections(builder.Configuration);
             builder.Services.AddUnitOfWork();
+            builder.Services.AddApplicationServices();
+            builder.Services.AddJwtAuthentication(builder.Configuration);
 
             var app = builder.Build();
-
+            
             // Configure the HTTP request pipeline.
 
             if (app.Environment.IsDevelopment())
@@ -28,8 +30,8 @@ namespace EmployeeSystem.API
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
 
