@@ -11,5 +11,5 @@ public class TaskDto
 
     public DateTime CompleteBy { get; set; }
 
-    public TaskStatus Status { get; set; }
+    public string Status { get; set; } = default!;
 }

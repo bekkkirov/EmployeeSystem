@@ -16,7 +16,7 @@ public class EmployeeDto
 
     public decimal Salary { get; set; }
 
-    public Post Post { get; set; }
+    public string Post { get; set; } = default!;
 
     public List<TaskDto> AssignedTasks { get; set; } = new List<TaskDto>();
 }
