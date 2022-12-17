@@ -15,6 +15,7 @@ namespace EmployeeSystem.API
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbConnections(builder.Configuration);
             builder.Services.AddUnitOfWork();
+            builder.Services.AddAutoMapper();
             builder.Services.AddApplicationServices();
             builder.Services.AddJwtAuthentication(builder.Configuration);
 

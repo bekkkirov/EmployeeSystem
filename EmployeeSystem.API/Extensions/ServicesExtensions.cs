@@ -32,6 +32,9 @@ public static class ServicesExtensions
     public static void AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
+        services.AddScoped<ITaskService, TaskService>();
+        services.AddScoped<IEmployeeService, EmployeeService>();
     }
 
     public static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
