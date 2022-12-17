@@ -11,6 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Exceptions\" />
+    <Folder Include="Interfaces\Services\" />
+    <Folder Include="Models\" />
     <Folder Include="Options\" />
   </ItemGroup>
 
