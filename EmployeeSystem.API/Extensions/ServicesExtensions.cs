@@ -2,6 +2,7 @@
 using EmployeeSystem.Application.Interfaces.Persistence;
 using EmployeeSystem.Application.Interfaces.Services;
 using EmployeeSystem.Application.Options;
+using EmployeeSystem.Infrastructure.Mapping;
 using EmployeeSystem.Infrastructure.Persistence;
 using EmployeeSystem.Infrastructure.Persistence.DataAccess;
 using EmployeeSystem.Infrastructure.Services;
@@ -57,5 +58,10 @@ public static class ServicesExtensions
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.Key)),
                     };
                 });
+    }
+
+    public static void AddAutoMapper(this IServiceCollection services)
+    {
+        services.AddAutoMapper(typeof(MapperProfile).Assembly);
     }
 }
