@@ -9,6 +9,6 @@ public class MapperProfile : Profile
     public MapperProfile()
     {
         CreateMap<Employee, EmployeeDto>();
-        CreateMap<Task, TaskDto>();
+        CreateMap<EmployeeTask, TaskDto>();
     }
 }
