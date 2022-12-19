@@ -21,6 +21,7 @@ namespace EmployeeSystem.API
             builder.Services.AddAutoMapper();
             builder.Services.AddApplicationServices();
             builder.Services.AddJwtAuthentication(builder.Configuration);
+            builder.Services.AddIdentity();
             builder.Services.AddHttpContextAccessor();
 
             var app = builder.Build();

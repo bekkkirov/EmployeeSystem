@@ -2,11 +2,14 @@
 using EmployeeSystem.Application.Interfaces.Persistence;
 using EmployeeSystem.Application.Interfaces.Services;
 using EmployeeSystem.Application.Options;
+using EmployeeSystem.Infrastructure.Identity;
+using EmployeeSystem.Infrastructure.Identity.Entities;
 using EmployeeSystem.Infrastructure.Mapping;
 using EmployeeSystem.Infrastructure.Persistence;
 using EmployeeSystem.Infrastructure.Persistence.DataAccess;
 using EmployeeSystem.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -20,6 +23,7 @@ public static class ServicesExtensions
                                    .Get<DbConnectionsOptions>();
 
         services.AddDbContext<SystemContext>(opt => opt.UseSqlServer(options.SystemDb));
+        services.AddDbContext<IdentityContext>(opt => opt.UseSqlServer(options.IdentityDb));
     }
 
     public static void AddUnitOfWork(this IServiceCollection services)
@@ -61,6 +65,24 @@ public static class ServicesExtensions
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.Key)),
                     };
                 });
+    }
+
+    public static void AddIdentity(this IServiceCollection services)
+    {
+        services.AddIdentityCore<UserIdentity>(opt =>
+                {
+                    opt.User.RequireUniqueEmail = true;
+                    opt.Password.RequireUppercase = false;
+                    opt.Password.RequireLowercase = false;
+                    opt.Password.RequireNonAlphanumeric = false;
+                    opt.Password.RequireDigit = false;
+                    opt.Password.RequiredLength = 5;
+                })
+                .AddRoles<UserRole>()
+                .AddRoleManager<RoleManager<UserRole>>()
+                .AddSignInManager<SignInManager<UserIdentity>>()
+                .AddRoleValidator<RoleValidator<UserRole>>()
+                .AddEntityFrameworkStores<IdentityContext>();
     }
 
     public static void AddAutoMapper(this IServiceCollection services)
