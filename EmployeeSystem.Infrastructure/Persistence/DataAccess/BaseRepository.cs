@@ -6,18 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeSystem.Infrastructure.Persistence.DataAccess;
 
-public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
+public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
 {
     private protected readonly SystemContext _context;
     private protected readonly DbSet<TEntity> _set;
 
-    public BaseRepository(SystemContext context)
+    protected BaseRepository(SystemContext context)
     {
         _context = context;
         _set = context.Set<TEntity>();
     }
 
-    public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter)
+    public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null)
     {
         if (filter is null)
         {
