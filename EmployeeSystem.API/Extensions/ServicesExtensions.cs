@@ -33,12 +33,18 @@ public static class ServicesExtensions
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 
+    public static void AddApplicationOptions(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
+    }
+
     public static void AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddScoped<ITaskService, TaskService>();
         services.AddScoped<IEmployeeService, EmployeeService>();
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
     }
 
     public static void AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)

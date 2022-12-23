@@ -19,6 +19,7 @@ namespace EmployeeSystem.API
             builder.Services.AddDbConnections(builder.Configuration);
             builder.Services.AddUnitOfWork();
             builder.Services.AddAutoMapper();
+            builder.Services.AddApplicationOptions(builder.Configuration);
             builder.Services.AddApplicationServices();
             builder.Services.AddJwtAuthentication(builder.Configuration);
             builder.Services.AddIdentity();
