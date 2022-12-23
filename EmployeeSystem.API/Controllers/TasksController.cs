@@ -1,9 +1,11 @@
 ﻿using EmployeeSystem.Application.Interfaces.Services;
 using EmployeeSystem.Application.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeSystem.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class TasksController : ControllerBase
