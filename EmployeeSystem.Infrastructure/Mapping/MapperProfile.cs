@@ -10,5 +10,6 @@ public class MapperProfile : Profile
     {
         CreateMap<Employee, EmployeeDto>();
         CreateMap<EmployeeTask, TaskDto>();
+        CreateMap<SignUpDto, Employee>();
     }
 }
